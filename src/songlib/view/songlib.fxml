@@ -50,6 +50,7 @@
             <TextField fx:id="songName" prefHeight="27.0" prefWidth="110.0" promptText="Song Name" />
             <TextField fx:id="artist" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="110.0" promptText="Artist" />
             <TextField fx:id="details" layoutX="120.0" layoutY="10.0" prefHeight="27.0" prefWidth="137.0" promptText="Details" />
+            <Button mnemonicParsing="false" fx:id="saveEdit" text="Save" />
             <!--  <Button mnemonicParsing="false" text="Delete" />
             <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" text="Edit" />-->
          </children>

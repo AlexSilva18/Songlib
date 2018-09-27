@@ -36,6 +36,7 @@ public class songlibController {
 	@FXML Button addSong;
 	@FXML Button editSong;
 	@FXML Button deleteSong;
+	@FXML Button saveEdit;
 
 
 	private ObservableList<Song> obsList = FXCollections.observableArrayList();
@@ -45,9 +46,13 @@ public class songlibController {
 
 	public void start(Stage mainStage) {
 
+		saveEdit.setDisable(true);
+
 		// testing song added to Observable list
 		Song s = new Song("Ride with Me", "Nelly", "Album");
+		Song t = new Song("Ride", "21PIlots", "Yea");
 		songList.add(s);
+		songList.add(t);
 		// write data from file to arrayList
 		obsList.addAll(songList);
 		listView.getItems().addAll(obsList);
@@ -70,35 +75,34 @@ public class songlibController {
 					// add songs from ArrayList to ObservableList
 					updateObslList(newSong, obsList);
 					clearTextField();
-					//obsList.add(0, newSong);
+
 				}
+				saveEdit.setDisable(true);
 			}
 		});
 
 		// Still not functional
 		editSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
+			public final void handle(ActionEvent event) {
 				//showItemInputDialog(mainStage);
-				editSong.setText("Save");
+				saveEdit.setDisable(false);
+
 				Song song = listView.getSelectionModel().getSelectedItem();
 				int index = listView.getSelectionModel().getSelectedIndex();
 
+				// Fill textFields with item selected to edit
 				songName.setText(song.getSongName());
 				artist.setText(song.getArtist());
 				details.setText(song.getDescription());
 
-				editSong.setOnAction(new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
-						song.setSongFields(songName.getText(), artist.getText(), details.getText());
-						songList.set(index, song);
-						obsList.removeAll(songList);
-						obsList.setAll(songList);
-						editSong.setText("Edit");
-						clearTextField();
-					}
-				});
+				// fetch songList for the index holding the selected song
+				int songListIndex = songList.indexOf(song);
+
+
+				// saves edited song to the songList and updates the observableList
+				saveEdit.setOnAction(e -> saveAction(index, songListIndex, song));
+
 			}
 		});
 
@@ -106,8 +110,13 @@ public class songlibController {
 		deleteSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				Song song = listView.getSelectionModel().getSelectedItem();
 				int index = listView.getSelectionModel().getSelectedIndex();
-				obsList.remove(index);
+				int songListIndex = songList.indexOf(song);
+
+				songList.remove(songListIndex);
+				obsList.remove(song);
+				listView.getItems().removeAll(obsList);
 			}
 		});
 		
@@ -121,15 +130,31 @@ public class songlibController {
 
 	// Populate observableList with new Song
 	private void updateObslList(Song newSong, ObservableList<Song> obsList){
-
-		/*obsList = FXCollections.observableArrayList(
-				// add Song
-		);*/
-		//listView.setItems(obsList);
 		obsList.clear();
 		obsList.addAll(newSong);
 		listView.getItems().addAll(obsList);
 
+	}
+
+	private void saveAction(int index, int songListIndex, Song song){
+
+		// fetch the updated fields
+		song.setSongFields(songName.getText(), artist.getText(), details.getText());
+
+		// update songList with the edited song fields
+		songList.set(songListIndex, song);
+
+		obsList.setAll(song);
+		obsList.clear();
+
+		clearTextField();
+		saveEdit.setDisable(true);
+	}
+
+	private void clearTextField(){
+		songName.clear();
+		artist.clear();
+		details.clear();
 	}
 
 	/*private void showSongList(Stage mainStage) {
@@ -162,10 +187,6 @@ public class songlibController {
 		
 	}*/
 
-	private void clearTextField(){
-		songName.clear();
-		artist.clear();
-		details.clear();
-	}
+
 	
 }
