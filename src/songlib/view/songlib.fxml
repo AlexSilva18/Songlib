@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane stylesheets="/songlib/view/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songlib.view.songlibController">
+<AnchorPane prefHeight="400.0" prefWidth="501.0" stylesheets="/songlib/view/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songlib.view.songlibController">
 
 	<padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -54,6 +54,21 @@
             <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" text="Edit" />-->
          </children>
       </HBox>
-      <ListView fx:id="listView" layoutX="21.0" layoutY="100.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="241.0" prefWidth="426.0" />
+      <ListView fx:id="listView" layoutX="38.0" layoutY="130.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="241.0" prefWidth="426.0" />
+      <Text layoutX="69.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Song" wrappingWidth="50.09521484375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="200.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist" wrappingWidth="50.09521484375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="321.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="107.09521484375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -36,24 +36,23 @@ public class songlibController {
 	@FXML Button addSong;
 	@FXML Button editSong;
 	@FXML Button deleteSong;
-	
-	
-	
-	private ObservableList<Song> obsList;
-	//private ObservableList<String> list = FXCollections.observableArrayList();
-	
-	// Declare arrayList
+
+
+	private ObservableList<Song> obsList = FXCollections.observableArrayList();
+
+
 	ArrayList<Song> songList = new ArrayList<>();
 
 	public void start(Stage mainStage) {
 
 		// testing song added to Observable list
 		Song s = new Song("Ride with Me", "Nelly", "Album");
-
+		songList.add(s);
 		// write data from file to arrayList
-
+		obsList.addAll(songList);
+		listView.getItems().addAll(obsList);
 		// add ArrayList<Song> songList to observableList so we can populate it with all the values
-		updateObslList(s, obsList);
+		//updateObslList(songList, obsList);
 
 
 		
@@ -66,10 +65,11 @@ public class songlibController {
 
 					// Create new song instance to add to ArrayList
 					Song newSong = new Song(songName.getText(), artist.getText(), details.getText());
-					songList.add(newSong);
+					songList.add(0, newSong);
 
 					// add songs from ArrayList to ObservableList
 					updateObslList(newSong, obsList);
+					clearTextField();
 					//obsList.add(0, newSong);
 				}
 			}
@@ -80,6 +80,25 @@ public class songlibController {
 			@Override
 			public void handle(ActionEvent event) {
 				//showItemInputDialog(mainStage);
+				editSong.setText("Save");
+				Song song = listView.getSelectionModel().getSelectedItem();
+				int index = listView.getSelectionModel().getSelectedIndex();
+
+				songName.setText(song.getSongName());
+				artist.setText(song.getArtist());
+				details.setText(song.getDescription());
+
+				editSong.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent event) {
+						song.setSongFields(songName.getText(), artist.getText(), details.getText());
+						songList.set(index, song);
+						obsList.removeAll(songList);
+						obsList.setAll(songList);
+						editSong.setText("Edit");
+						clearTextField();
+					}
+				});
 			}
 		});
 
@@ -103,13 +122,14 @@ public class songlibController {
 	// Populate observableList with new Song
 	private void updateObslList(Song newSong, ObservableList<Song> obsList){
 
-		obsList = FXCollections.observableArrayList(
+		/*obsList = FXCollections.observableArrayList(
 				// add Song
-				newSong
+		);*/
+		//listView.setItems(obsList);
+		obsList.clear();
+		obsList.addAll(newSong);
+		listView.getItems().addAll(obsList);
 
-		);
-		listView.setItems(obsList);
-		//listView.getItems().addAll(obsList);
 	}
 
 	/*private void showSongList(Stage mainStage) {
@@ -141,6 +161,11 @@ public class songlibController {
 		
 		
 	}*/
-	
+
+	private void clearTextField(){
+		songName.clear();
+		artist.clear();
+		details.clear();
+	}
 	
 }
