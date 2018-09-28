@@ -6,11 +6,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="albumDisplay" prefHeight="400.0" prefWidth="501.0" stylesheets="/songlib/view/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songlib.view.songlibController">
+<AnchorPane id="albumDisplay" prefHeight="485.0" prefWidth="501.0" stylesheets="/songlib/view/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songlib.view.songlibController">
 
 	<padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -57,7 +56,7 @@
             <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" text="Edit" />-->
          </children>
       </HBox>
-      <ListView fx:id="listView" layoutX="38.0" layoutY="130.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="241.0" prefWidth="263.0" />
+      <ListView fx:id="listView" layoutX="38.0" layoutY="130.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="306.0" prefWidth="263.0" />
       <Text layoutX="69.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Song" wrappingWidth="50.09521484375">
          <font>
             <Font size="18.0" />
@@ -73,15 +72,50 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="314.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album" />
-      <Text layoutX="320.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
-      <VBox layoutX="375.0" layoutY="139.0" prefHeight="86.0" prefWidth="100.0">
-         <children>
-            <Text id="albumDisplay" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="80.65966796875">
-               <font>
-                  <Font size="21.0" />
-               </font></Text>
-         </children>
-      </VBox>
+      <!--<Text fx:id="albumDisplay" strokeType="OUTSIDE" strokeWidth="0.0" text="A" textAlignment="CENTER" wrappingWidth="116.65966796875" text="STUFF">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>-->
+      <Button fx:id="cancelOperation" layoutX="425.0" layoutY="87.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="CXL" />
+      <Text layoutX="314.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="songNameDisplay" layoutX="386.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <Text fx:id="artistDisplay" layoutX="386.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="albumDisplay" layoutX="386.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="yearDisplay" layoutX="386.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

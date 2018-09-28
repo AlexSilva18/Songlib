@@ -23,13 +23,21 @@ public class songlibController {
 	@FXML private TextField artist;
 	@FXML private TextField album;
 	@FXML private TextField year;
-	@FXML private Text albumDisplay = new Text("Nothing selected");
-	@FXML private Label yearDisplay;
-	@FXML ListView<Song> listView;
+
+	@FXML private Text songNameDisplay;
+	@FXML private Text artistDisplay;
+	@FXML private Text albumDisplay;
+	@FXML private Text yearDisplay;
+
 	@FXML Button addSong;
 	@FXML Button editSong;
 	@FXML Button deleteSong;
 	@FXML Button saveEdit;
+	@FXML Button cancelOperation;
+
+	@FXML ListView<Song> listView;
+
+
 
 
 	private ObservableList<Song> obsList = FXCollections.observableArrayList();
@@ -39,12 +47,17 @@ public class songlibController {
 
 	public void start(Stage mainStage) {
 
+		//Song s = new Song("stuff", "1", "2", "3");
+		//obsList.addAll(s);
 		// keep save button deactivated
 		saveEdit.setDisable(true);
 
 		// write data from file to arrayList
 		obsList.addAll(songList);
 		listView.getItems().addAll(obsList);
+
+		// pre-select first song in listView if any
+		listView.getSelectionModel().select(0);
 
 		//int selectedIndex = listView.getSelectionModel().getSelectedIndex();
 
@@ -53,8 +66,10 @@ public class songlibController {
 				.addListener(new ChangeListener<Song>() {
 								 @Override
 								 public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
-									 System.out.println(newValue.getAlbum());
-									 albumDisplay.setText(newValue.getAlbum());
+									 //System.out.println(newValue.getAlbum());
+									 
+									 // sets the text displays to the values of the song selected
+									 setDisplay(newValue);
 								 }
 							 });
 
@@ -68,6 +83,13 @@ public class songlibController {
 		// add ArrayList<Song> songList to observableList so we can populate it with all the values
 		//updateObslList(songList, obsList);
 
+		cancelOperation.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				clearTextField();
+				saveEdit.setDisable(true);
+			}
+		});
 
 		
 		// ADD button listener to add fields to ObservableList
@@ -102,6 +124,10 @@ public class songlibController {
 
 						// add songs from ArrayList to ObservableList
 						updateObslList(newSong, obsList);
+
+						// pre-select added song
+						listView.getSelectionModel().select(index);
+
 						clearTextField();
 					}
 				}
@@ -152,9 +178,13 @@ public class songlibController {
 				obsList.remove(song);
 				listView.getItems().remove(index);
 				//listView.getItems().setAll(obsList);
+
+				// pre-select next/previous song when deleted
+				listView.getSelectionModel().select(index);
 				saveEdit.setDisable(true);
 			}
 		});
+
 		
 		/*listView
 			.getSelectionModel()
@@ -195,6 +225,16 @@ public class songlibController {
 		artist.clear();
 		album.clear();
 		year.clear();
+	}
+
+	private void setDisplay(Song song){
+
+		// set display fields to mouse selected Song
+		songNameDisplay.setText(song.getSongName());
+		artistDisplay.setText(song.getArtist());
+		albumDisplay.setText(song.getAlbum());
+		yearDisplay.setText(song.getYear());
+
 	}
 
 	/*private void showSongList(Stage mainStage) {

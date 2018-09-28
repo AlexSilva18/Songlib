@@ -33,7 +33,7 @@ public class Main extends Application {
 		songlibController controller = loader.getController();
 		controller.start(primaryStage);
 		
-		Scene scene = new Scene(root, 500, 450);
+		Scene scene = new Scene(root, 600, 550);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Song Library");
 		primaryStage.setResizable(false);
