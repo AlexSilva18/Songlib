@@ -6,10 +6,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="501.0" stylesheets="/songlib/view/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songlib.view.songlibController">
+<AnchorPane id="albumDisplay" prefHeight="400.0" prefWidth="501.0" stylesheets="/songlib/view/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songlib.view.songlibController">
 
 	<padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -38,7 +39,7 @@
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="deleteSong" text="DELETE">
+            <Button fx:id="deleteSong" prefHeight="38.0" prefWidth="105.0" text="DELETE">
             	<font>
                   <Font size="19.0" />
                </font>
@@ -49,13 +50,14 @@
          <children>
             <TextField fx:id="songName" prefHeight="27.0" prefWidth="110.0" promptText="Song Name" />
             <TextField fx:id="artist" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="110.0" promptText="Artist" />
-            <TextField fx:id="details" layoutX="120.0" layoutY="10.0" prefHeight="27.0" prefWidth="137.0" promptText="Details" />
-            <Button mnemonicParsing="false" fx:id="saveEdit" text="Save" />
+            <TextField fx:id="album" layoutX="120.0" layoutY="10.0" prefHeight="27.0" prefWidth="106.0" promptText="Album" />
+            <TextField fx:id="year" layoutX="230.0" layoutY="10.0" prefHeight="27.0" prefWidth="77.0" promptText="Year" />
+            <Button fx:id="saveEdit" mnemonicParsing="false" text="Save" />
             <!--  <Button mnemonicParsing="false" text="Delete" />
             <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" text="Edit" />-->
          </children>
       </HBox>
-      <ListView fx:id="listView" layoutX="38.0" layoutY="130.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="241.0" prefWidth="426.0" />
+      <ListView fx:id="listView" layoutX="38.0" layoutY="130.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="241.0" prefWidth="263.0" />
       <Text layoutX="69.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Song" wrappingWidth="50.09521484375">
          <font>
             <Font size="18.0" />
@@ -71,5 +73,15 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <Text layoutX="314.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album" />
+      <Text layoutX="320.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" />
+      <VBox layoutX="375.0" layoutY="139.0" prefHeight="86.0" prefWidth="100.0">
+         <children>
+            <Text id="albumDisplay" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="80.65966796875">
+               <font>
+                  <Font size="21.0" />
+               </font></Text>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -1,37 +1,30 @@
 package songlib.view;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Optional;
 
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Orientation;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import songlib.application.Song;
-
+import songlib.application.SongMethod;
 
 public class songlibController {
 	
 	@FXML private TextField songName;
 	@FXML private TextField artist;
-	@FXML private TextField details;
+	@FXML private TextField album;
+	@FXML private TextField year;
+	@FXML private Text albumDisplay = new Text("Nothing selected");
+	@FXML private Label yearDisplay;
 	@FXML ListView<Song> listView;
 	@FXML Button addSong;
 	@FXML Button editSong;
@@ -46,16 +39,32 @@ public class songlibController {
 
 	public void start(Stage mainStage) {
 
+		// keep save button deactivated
 		saveEdit.setDisable(true);
 
-		// testing song added to Observable list
-		Song s = new Song("Ride with Me", "Nelly", "Album");
-		Song t = new Song("Ride", "21PIlots", "Yea");
-		songList.add(s);
-		songList.add(t);
 		// write data from file to arrayList
 		obsList.addAll(songList);
 		listView.getItems().addAll(obsList);
+
+		//int selectedIndex = listView.getSelectionModel().getSelectedIndex();
+
+		// gets every mouse selection and display the song details
+		listView.getSelectionModel().selectedItemProperty()
+				.addListener(new ChangeListener<Song>() {
+								 @Override
+								 public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
+									 System.out.println(newValue.getAlbum());
+									 albumDisplay.setText(newValue.getAlbum());
+								 }
+							 });
+
+//		listView.getSelectionModel()
+//				.getSelectedItem((song.) -> albumDisplay.setText());
+		//albumDisplay.setText(song.getAlbum());
+		//yearDisplay.setText(song.getYear());
+
+		//System.out.println(listView.getSelectionModel().getSelectedItems());
+
 		// add ArrayList<Song> songList to observableList so we can populate it with all the values
 		//updateObslList(songList, obsList);
 
@@ -65,17 +74,35 @@ public class songlibController {
 		addSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+
 				//check if input fields are empty
-				if (!songName.getText().isEmpty() && !artist.getText().isEmpty() && !details.getText().isEmpty()) {
+				if (!songName.getText().isEmpty() && !artist.getText().isEmpty()) {
 
 					// Create new song instance to add to ArrayList
-					Song newSong = new Song(songName.getText(), artist.getText(), details.getText());
-					songList.add(0, newSong);
+					Song newSong = new Song(songName.getText(), artist.getText(), album.getText(), year.getText());
 
-					// add songs from ArrayList to ObservableList
-					updateObslList(newSong, obsList);
-					clearTextField();
+					// retrieve sorted index to insert new song, returns -1 if song is duplicate
+					int index = new SongMethod().insertSortedIndex(songList, newSong);
 
+					if (index == -1){
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.initOwner(mainStage);  // need to know the parent of screen and pop up on the center to that screen
+						alert.setTitle("Error");
+						alert.setHeaderText("Song is already in the List");
+						String content  = "Song: " + newSong.getSongName() + " " +
+								"Artist: " + newSong.getArtist();
+
+						alert.setContentText(content);
+						alert.showAndWait();
+					}
+					else{
+						//System.out.println("sorted index is: " + index);
+						songList.add(index, newSong);
+
+						// add songs from ArrayList to ObservableList
+						updateObslList(newSong, obsList);
+						clearTextField();
+					}
 				}
 				saveEdit.setDisable(true);
 			}
@@ -85,20 +112,22 @@ public class songlibController {
 		editSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public final void handle(ActionEvent event) {
+
 				//showItemInputDialog(mainStage);
 				saveEdit.setDisable(false);
 
+				// get mouse selected song and index
 				Song song = listView.getSelectionModel().getSelectedItem();
 				int index = listView.getSelectionModel().getSelectedIndex();
 
 				// Fill textFields with item selected to edit
 				songName.setText(song.getSongName());
 				artist.setText(song.getArtist());
-				details.setText(song.getDescription());
+				album.setText(song.getAlbum());
+				year.setText(song.getYear());
 
 				// fetch songList for the index holding the selected song
 				int songListIndex = songList.indexOf(song);
-
 
 				// saves edited song to the songList and updates the observableList
 				saveEdit.setOnAction(e -> saveAction(index, songListIndex, song));
@@ -106,17 +135,23 @@ public class songlibController {
 			}
 		});
 
-		// Still not functional
+		// Still gives error when list is empty
 		deleteSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				// get mouse selected song and index
 				Song song = listView.getSelectionModel().getSelectedItem();
 				int index = listView.getSelectionModel().getSelectedIndex();
+
+				// get index of the song in the ArrayList
 				int songListIndex = songList.indexOf(song);
+				//System.out.println(songList.get(songListIndex).getSongName());
 
 				songList.remove(songListIndex);
 				obsList.remove(song);
-				listView.getItems().removeAll(obsList);
+				listView.getItems().remove(index);
+				//listView.getItems().setAll(obsList);
+				saveEdit.setDisable(true);
 			}
 		});
 		
@@ -131,15 +166,17 @@ public class songlibController {
 	// Populate observableList with new Song
 	private void updateObslList(Song newSong, ObservableList<Song> obsList){
 		obsList.clear();
-		obsList.addAll(newSong);
-		listView.getItems().addAll(obsList);
+		obsList.addAll(songList);
+//		listView.getItems().removeAll(obsList);
+		//listView.getItems().addAll(obsList);
+		listView.getItems().setAll(obsList);
 
 	}
 
 	private void saveAction(int index, int songListIndex, Song song){
 
-		// fetch the updated fields
-		song.setSongFields(songName.getText(), artist.getText(), details.getText());
+		// update song fields
+		song.setSongFields(songName.getText(), artist.getText(), album.getText(), year.getText());
 
 		// update songList with the edited song fields
 		songList.set(songListIndex, song);
@@ -151,10 +188,12 @@ public class songlibController {
 		saveEdit.setDisable(true);
 	}
 
+	// clear all TextFields
 	private void clearTextField(){
 		songName.clear();
 		artist.clear();
-		details.clear();
+		album.clear();
+		year.clear();
 	}
 
 	/*private void showSongList(Stage mainStage) {
