@@ -79,7 +79,8 @@ public class songlibController {
 				if (!songName.getText().isEmpty() && !artist.getText().isEmpty()) {
 
 					// Create new song instance to add to ArrayList
-					Song newSong = new Song(songName.getText(), artist.getText(), album.getText(), year.getText());
+					Song newSong = new Song(songName.getText().toLowerCase(), artist.getText().toLowerCase(),
+							album.getText().toLowerCase(), year.getText().toLowerCase());
 
 					// retrieve sorted index to insert new song, returns -1 if song is duplicate
 					int index = new SongMethod().insertSortedIndex(songList, newSong);
@@ -121,10 +122,10 @@ public class songlibController {
 				int index = listView.getSelectionModel().getSelectedIndex();
 
 				// Fill textFields with item selected to edit
-				songName.setText(song.getSongName());
-				artist.setText(song.getArtist());
-				album.setText(song.getAlbum());
-				year.setText(song.getYear());
+				songName.setText(song.getSongName().toLowerCase());
+				artist.setText(song.getArtist().toLowerCase());
+				album.setText(song.getAlbum().toLowerCase());
+				year.setText(song.getYear().toLowerCase());
 
 				// fetch songList for the index holding the selected song
 				int songListIndex = songList.indexOf(song);
