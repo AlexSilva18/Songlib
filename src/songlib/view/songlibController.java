@@ -57,21 +57,21 @@ public class songlibController {
 		listView.getItems().addAll(obsList);
 
 		// pre-select first song in listView if any
-		listView.getSelectionModel().select(0);
+		if (!obsList.isEmpty())
+			listView.getSelectionModel().select(0);
 
 		//int selectedIndex = listView.getSelectionModel().getSelectedIndex();
 
 		// gets every mouse selection and display the song details
 		listView.getSelectionModel().selectedItemProperty()
 				.addListener(new ChangeListener<Song>() {
-								 @Override
-								 public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
-									 //System.out.println(newValue.getAlbum());
-									 
-									 // sets the text displays to the values of the song selected
-									 setDisplay(newValue);
-								 }
-							 });
+					@Override
+					public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
+						//System.out.println(oldValue.getSongName());
+						// sets the text displays to the values of the song selected
+						//setDisplay(newValue);
+					}
+				});
 
 //		listView.getSelectionModel()
 //				.getSelectedItem((song.) -> albumDisplay.setText());
@@ -91,7 +91,7 @@ public class songlibController {
 			}
 		});
 
-		
+
 		// ADD button listener to add fields to ObservableList
 		addSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -180,7 +180,9 @@ public class songlibController {
 				//listView.getItems().setAll(obsList);
 
 				// pre-select next/previous song when deleted
-				listView.getSelectionModel().select(index);
+				if (!songList.isEmpty()) {
+					listView.getSelectionModel().select(index);
+				}
 				saveEdit.setDisable(true);
 			}
 		});
@@ -197,11 +199,11 @@ public class songlibController {
 	// Populate observableList with new Song
 	private void updateObslList(Song newSong, ObservableList<Song> obsList){
 		obsList.clear();
+//		obsList.removeAll(songList);
 		obsList.addAll(songList);
-//		listView.getItems().removeAll(obsList);
+		//listView.getItems().removeAll(obsList);
 		//listView.getItems().addAll(obsList);
 		listView.getItems().setAll(obsList);
-
 	}
 
 	private void saveAction(int index, int songListIndex, Song song){
@@ -211,12 +213,12 @@ public class songlibController {
 
 		// update songList with the edited song fields
 		songList.set(songListIndex, song);
-
-		obsList.setAll(song);
 		obsList.clear();
+		obsList.setAll(songList);
 
 		clearTextField();
 		saveEdit.setDisable(true);
+		listView.getItems().setAll(obsList);
 	}
 
 	// clear all TextFields
@@ -228,12 +230,12 @@ public class songlibController {
 	}
 
 	private void setDisplay(Song song){
-
+		System.out.println(song.getSongName());
 		// set display fields to mouse selected Song
-		songNameDisplay.setText(song.getSongName());
+		/*songNameDisplay.setText(song.getSongName());
 		artistDisplay.setText(song.getArtist());
 		albumDisplay.setText(song.getAlbum());
-		yearDisplay.setText(song.getYear());
+		yearDisplay.setText(song.getYear());*/
 
 	}
 

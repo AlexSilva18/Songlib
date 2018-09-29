@@ -7,7 +7,7 @@ public class SongMethod extends Song{
     // Iterate through ArrayList and compare each Songs String
     // If the Song name is the same, loop again through the ArrayList and compare Artists
     public int insertSortedIndex(ArrayList<Song> songList, Song song){
-        System.out.println("Song is: " + song.getSongName());
+        //System.out.println("Song is: " + song.getSongName());
         int i = 0;
         for (Song s : songList){
             ++i;
