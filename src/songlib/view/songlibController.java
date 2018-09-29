@@ -70,7 +70,10 @@ public class songlibController{
 	public static ArrayList<Song> songList = new ArrayList<>();
 
 	public void start(Stage mainStage) {
+
+		// get data from SongLibrary.txt
 		readfromFIle();
+
 		//Song s = new Song("stuff", "1", "2", "3");
 		//obsList.addAll(s);
 
@@ -96,29 +99,21 @@ public class songlibController{
 					.addListener(new ChangeListener<Song>() {
 						@Override
 						public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
-							//System.out.println(newValue.getSongName());
 							// sets the text displays to the values of the song selected
 							setDisplay(newValue);
 						}
 					});
 		}
 
-
-//		listView.getSelectionModel()
-//				.getSelectedItem((song.) -> albumDisplay.setText());
-		//albumDisplay.setText(song.getAlbum());
-		//yearDisplay.setText(song.getYear());
-
-		//System.out.println(listView.getSelectionModel().getSelectedItems());
-
-		// add ArrayList<Song> songList to observableList so we can populate it with all the values
-		//updateObslList(songList, obsList);
-
+		// CXL button to clear all input fields
 		cancelOperation.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				// wipe input fields
 				clearTextField();
-				saveEdit.setDisable(true);
+
+				// enable all buttons except save button
+				toggleButtons(0, 1);
 			}
 		});
 
@@ -137,6 +132,7 @@ public class songlibController{
 					// retrieve sorted index to insert new song, returns -1 if song is duplicate
 					int index = new SongMethod().insertSortedIndex(songList, newSong);
 
+					// Pop Up error message for duplicate song
 					if (index == -1) {
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.initOwner(mainStage);  // need to know the parent of screen and pop up on the center to that screen
@@ -147,21 +143,22 @@ public class songlibController{
 
 						alert.setContentText(content);
 						alert.showAndWait();
-					} else {
-						//System.out.println("sorted index is: " + index);
-						songList.add(index, newSong);
 
-						// add songs from ArrayList to ObservableList
+					} else {
+						// add songs to ArrayList and then to ObservableList
+						songList.add(index, newSong);
 						updateObslList(index, obsList);
 
+						// wipe input fields
 						clearTextField();
 					}
 				}
+				// Keep all buttons active except save button
 				toggleButtons(0, 1);
 			}
 		});
 
-		// Still not functional
+		// Edit song fields and switch order in case of song or artist change
 		editSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public final void handle(ActionEvent event) {
@@ -188,6 +185,7 @@ public class songlibController{
 			}
 		});
 
+		// Delete song and wipe it from list
 		// Still gives error when list is empty
 		deleteSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -198,48 +196,44 @@ public class songlibController{
 
 				// get index of the song in the ArrayList
 				int songListIndex = songList.indexOf(song);
-				//System.out.println(songList.get(songListIndex).getSongName());
 
+				// update ArrayList, observableList and ListView
 				songList.remove(songListIndex);
 				obsList.remove(song);
 				listView.getItems().remove(index);
-				//listView.getItems().setAll(obsList);
 
 				// pre-select next/previous song when deleted
 				if (!songList.isEmpty()) {
 					listView.getSelectionModel().select(index);
 				}
 
+				// wipe input fields
 				clearTextField();
 
+				// Keep all buttons active except save button. If list is empty only enable Add Button
 				if (obsList.isEmpty())
 					toggleButtons(1, 1);
 				else
 					toggleButtons(0, 1);
 			}
 		});
-
-		
-		/*listView
-			.getSelectionModel()
-			.selectedIndexProperty()
-			.addListener(
-					(obs, oldVal, newVal) ->
-						showItemInputDialog(mainStage));*/
 	}
 
 	private void toggleButtons(int flag, int saveFlag) {
 
+		// Disable all buttons
 		if (flag == 1) {
 			editSong.setDisable(true);
 			deleteSong.setDisable(true);
 			cancelOperation.setDisable(true);
 
+			// Enable all buttons
 		} else if (flag == 0) {
 			editSong.setDisable(false);
 			deleteSong.setDisable(false);
 			cancelOperation.setDisable(false);
 		}
+		// disable/enable save button
 		if (saveFlag == 1) {
 			saveEdit.setDisable(true);
 		} else if (saveFlag == 0) {
@@ -248,18 +242,10 @@ public class songlibController{
 		}
 	}
 
-	private void displaySelection(Song song) {
-		songNameDisplay.setText(song.getSongName());
-		//setDisplay(song);
-	}
-
 	// Populate observableList with new Song
 	private void updateObslList(int index, ObservableList<Song> obsList) {
 		obsList.clear();
-//		obsList.removeAll(songList);
 		obsList.addAll(songList);
-		//listView.getItems().removeAll(obsList);
-		//listView.getItems().addAll(obsList);
 		listView.getItems().setAll(obsList);
 
 		// pre-select added song
@@ -271,19 +257,20 @@ public class songlibController{
 		// update song fields
 		song.setSongFields(songName.getText(), artist.getText(), album.getText(), year.getText());
 
-		// update songList with the edited song fields
-		//songList.set(songListIndex, song);
 		songList.remove(songListIndex);
-		int newIndex = new SongMethod().insertSortedIndex(songList, song);
-		songList.add(newIndex, song);
-		//System.out.println(newIndex);
-		updateObslList(newIndex, obsList);
-		//obsList.clear();
-		//obsList.addAll(songList);
 
+		// fetch sorted index to insert song in the ArrayList
+		int newIndex = new SongMethod().insertSortedIndex(songList, song);
+
+		// update ArrayList, observableList and Listview
+		songList.add(newIndex, song);
+		updateObslList(newIndex, obsList);
+
+		// Clear all input fields
 		clearTextField();
+
+		// Enable all buttons except save button
 		toggleButtons(0, 1);
-		//listView.getItems().setAll(obsList);
 	}
 
 	// clear all TextFields
@@ -301,6 +288,7 @@ public class songlibController{
 		albumDisplay.setText(song.getAlbum());
 		yearDisplay.setText(song.getYear());
 
+		// empty fields if observable list is empty
 		if (obsList.isEmpty()) {
 			songNameDisplay.setText(null);
 			artistDisplay.setText(null);
@@ -309,85 +297,45 @@ public class songlibController{
 		}
 	}
 
+	// Read songs from file and input them into the ArrayList
 	public void readfromFIle(){
 
 		File file = new File("SongLibrary.txt");
 		String items = null;
 		String[] songItems;
+
+		// check if file exists
 		if(file.exists() && file.isFile() ) {
 			try {
 				Scanner sc = new Scanner(file);
-				int line = 0;
+
+				// iterate line by line and split each line into 4 strings to store as the items of each song
 				while (sc.hasNextLine()) {
-					//System.out.printf("...  %s %n", sc.nextLine());
 					items = sc.nextLine();
 					songItems = items.split("\t");
-					//System.out.println(songItems[0] + songItems[1] + songItems[2] + songItems[3] );
 					songList.add(new Song(songItems[0],songItems[1], songItems[2],songItems[3]));
-					line++;
 				}
 				sc.close();
-//
-//					sc = new Scanner(file);
-//					line -= 2;
-//					sc.nextLine();
-//					sc.nextLine();
 
-				/*if (line % 4 == 0) {
-					for (int input = 0; input < line; input += 4) {
-						//System.out.println(sc.nextLine());
-						//songList.add(new Song(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine()));
-					}
-				}*/
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			//obsList.addAll(songList);
-			//updateObslList(0, obsList);
 		}
 	}
 
+	// write ArrayList to file
 	public void writetoFile() {
-
-			/*showSongDestribtion();
-
-			listView.getSelectionModel().selectedItemProperty().addListener(
-					(obs, oldValue, newValue) -> showSongDestribtion());*/
-
 		File file = new File("SongLibrary.txt");
 		try {
-			//File file = new File("SongLibrary.txt");
 			PrintWriter write = new PrintWriter(file);
 			file.createNewFile();
 
 			for(int i =0; i<songList.size(); i++) {
-				//System.out.println(songList.get(i).songtoWrite());
 				write.println(songList.get(i).songtoWrite());
-				/*write.println(songList.get(i).getSongName());
-				write.println(songList.get(i).getArtist());
-				write.println(songList.get(i).getAlbum());
-				write.println( songList.get(i).getYear());*/
-				/*if(i !=songList.size()-1) {
-					write.println("");
-				}*/
 			}
 			write.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void showSongDestribtion()
-	{
-		if(listView.getSelectionModel().getSelectedIndex() < 0)
-		{
-			return;
-		}
-
-		Song song = listView.getSelectionModel().getSelectedItem();
-		songName.setText(song.getSongName());
-		artist.setText(song.getArtist());
-		album.setText(song.getAlbum());
-		year.setText(song.getYear());
 	}
 }
