@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--CS 213 Fall 2018 - Assignment 1, Song Library
         Student1 Name Alex Silva  netid: ars366
         Student2 Name: Hongping Lin netid: Lin hl793
         Grader Name: Govind-->
-
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -105,9 +105,9 @@
       </Text>
       <Text layoutX="44.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Required)" />
       <Text layoutX="156.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Required)" />
-      <Text fx:id="songNameDisplay" layoutX="415.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text1" />
-      <Text fx:id="artistDisplay" layoutX="415.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text2" />
-      <Text fx:id="albumDisplay" layoutX="415.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text3" />
-      <Text fx:id="yearDisplay" layoutX="415.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text4" />
+      <Text fx:id="songNameDisplay" layoutX="415.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="artistDisplay" layoutX="415.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="albumDisplay" layoutX="415.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="yearDisplay" layoutX="415.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

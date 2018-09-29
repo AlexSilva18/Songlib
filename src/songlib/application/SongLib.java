@@ -53,6 +53,6 @@ public class SongLib extends Application {
 		songlibController controller = new songlibController();
 		ArrayList<Song> outputFile = new ArrayList<>();
 		outputFile.addAll(controller.songList);
-		controller.getfromFile();
+		controller.writetoFile();
 	}
 }

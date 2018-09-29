@@ -70,12 +70,12 @@ public class songlibController{
 	public static ArrayList<Song> songList = new ArrayList<>();
 
 	public void start(Stage mainStage) {
-		getfromFile();
+		readfromFIle();
 		//Song s = new Song("stuff", "1", "2", "3");
 		//obsList.addAll(s);
 
 		// keep buttons deactivated if list is empty
-		if (obsList.isEmpty())
+		if (songList.isEmpty())
 			toggleButtons(1, 1);
 		else
 			toggleButtons(0, 1);
@@ -152,7 +152,7 @@ public class songlibController{
 						songList.add(index, newSong);
 
 						// add songs from ArrayList to ObservableList
-						updateObslList(index, newSong, obsList);
+						updateObslList(index, obsList);
 
 						clearTextField();
 					}
@@ -210,6 +210,8 @@ public class songlibController{
 					listView.getSelectionModel().select(index);
 				}
 
+				clearTextField();
+
 				if (obsList.isEmpty())
 					toggleButtons(1, 1);
 				else
@@ -252,7 +254,7 @@ public class songlibController{
 	}
 
 	// Populate observableList with new Song
-	private void updateObslList(int index, Song newSong, ObservableList<Song> obsList) {
+	private void updateObslList(int index, ObservableList<Song> obsList) {
 		obsList.clear();
 //		obsList.removeAll(songList);
 		obsList.addAll(songList);
@@ -275,7 +277,7 @@ public class songlibController{
 		int newIndex = new SongMethod().insertSortedIndex(songList, song);
 		songList.add(newIndex, song);
 		//System.out.println(newIndex);
-		updateObslList(newIndex, song, obsList);
+		updateObslList(newIndex, obsList);
 		//obsList.clear();
 		//obsList.addAll(songList);
 
@@ -307,20 +309,22 @@ public class songlibController{
 		}
 	}
 
-	public void getfromFile() {
-		//System.out.println("does file exist?");
-		File file = new File("SongLibrary.txt");
+	public void readfromFIle(){
 
-		if(file.exists() && file.isFile())
-		{
-			//System.out.println("file exists");
+		File file = new File("SongLibrary.txt");
+		String items = null;
+		String[] songItems;
+		if(file.exists() && file.isFile() ) {
 			try {
 				Scanner sc = new Scanner(file);
-				int line =0;
-				while(sc.hasNextLine())
-				{
+				int line = 0;
+				while (sc.hasNextLine()) {
+					//System.out.printf("...  %s %n", sc.nextLine());
+					items = sc.nextLine();
+					songItems = items.split("\t");
+					//System.out.println(songItems[0] + songItems[1] + songItems[2] + songItems[3] );
+					songList.add(new Song(songItems[0],songItems[1], songItems[2],songItems[3]));
 					line++;
-					sc.nextLine();
 				}
 				sc.close();
 //
@@ -329,54 +333,50 @@ public class songlibController{
 //					sc.nextLine();
 //					sc.nextLine();
 
-				if(line % 4 == 0)
-				{
-					for(int input=0; input<line; input+=4)
-					{
-						songList.add(new Song(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine()));
+				/*if (line % 4 == 0) {
+					for (int input = 0; input < line; input += 4) {
+						//System.out.println(sc.nextLine());
+						//songList.add(new Song(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine()));
 					}
-				}
-			}catch (FileNotFoundException e)
-			{
+				}*/
+			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-
-			listView.setItems(obsList);
-			if(!songList.isEmpty())
-			{
-				listView.getSelectionModel().select(0);
-			}
-
-			showSongDestribtion();
-
-			listView.getSelectionModel().selectedItemProperty().addListener(
-					(obs, oldValue, newValue) -> showSongDestribtion());
-
-
-
-		}else {
-			System.out.println("file does not exist");
-			try {
-				//File file = new File("SongLibrary.txt");
-				PrintWriter write = new PrintWriter(file);
-				file.createNewFile();
-				for(int i =0; i<songList.size(); i++) {
-					write.println(songList.get(i).getSongName());
-					write.println(songList.get(i).getArtist());
-					write.println(songList.get(i).getAlbum());
-					write.print(songList.get(i).getYear());
-					if(i !=songList.size()-1) {
-						write.println("");
-					}write.close();
-
-				}
-
-			}catch (IOException e) {
-				e.printStackTrace();
-			}
-
+			//obsList.addAll(songList);
+			//updateObslList(0, obsList);
 		}
 	}
+
+	public void writetoFile() {
+
+			/*showSongDestribtion();
+
+			listView.getSelectionModel().selectedItemProperty().addListener(
+					(obs, oldValue, newValue) -> showSongDestribtion());*/
+
+		File file = new File("SongLibrary.txt");
+		try {
+			//File file = new File("SongLibrary.txt");
+			PrintWriter write = new PrintWriter(file);
+			file.createNewFile();
+
+			for(int i =0; i<songList.size(); i++) {
+				//System.out.println(songList.get(i).songtoWrite());
+				write.println(songList.get(i).songtoWrite());
+				/*write.println(songList.get(i).getSongName());
+				write.println(songList.get(i).getArtist());
+				write.println(songList.get(i).getAlbum());
+				write.println( songList.get(i).getYear());*/
+				/*if(i !=songList.size()-1) {
+					write.println("");
+				}*/
+			}
+			write.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void showSongDestribtion()
 	{
 		if(listView.getSelectionModel().getSelectedIndex() < 0)

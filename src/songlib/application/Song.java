@@ -41,6 +41,10 @@ public class Song {
         return year;
     }
 
+    public String songtoWrite() {
+        return (songName + "\t" + artist + "\t" + album + "\t" + year);
+    }
+
     /*public int fetchSong(ArrayList<Song> songList, Song song){
         for (Song s : songList){
             if (s.getSongName() != null &&  s.getSongName().equals(song.getSongName()) &&
