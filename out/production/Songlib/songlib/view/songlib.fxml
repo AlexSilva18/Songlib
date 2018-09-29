@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--CS 213 Fall 2018 - Assignment 1, Song Library
+        Student1 Name Alex Silva  netid: ars366
+        Student2 Name: Hongping Lin netid: Lin hl793
+        Grader Name: Govind-->
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="albumDisplay" prefHeight="485.0" prefWidth="501.0" stylesheets="/songlib/view/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="songlib.view.songlibController">
+
+	<padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <children>
+      <HBox layoutX="21.0" layoutY="4.0" prefHeight="56.0" prefWidth="460.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Song List" wrappingWidth="123.09521484375">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+            </Text>
+            <Button fx:id="addSong" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="65.0" text="ADD" textAlignment="CENTER">
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="50.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="editSong" prefHeight="46.0" prefWidth="73.0" text="EDIT">
+            	<font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteSong" prefHeight="28.0" prefWidth="81.0" text="DELETE">
+            	<font>
+                  <Font size="19.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <HBox layoutX="21.0" layoutY="60.0" prefHeight="26.0" prefWidth="473.0">
+         <children>
+            <TextField fx:id="songName" alignment="CENTER" prefHeight="27.0" prefWidth="110.0" promptText="Song Name" />
+            <TextField fx:id="artist" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="27.0" prefWidth="110.0" promptText="Artist" />
+            <TextField fx:id="album" alignment="CENTER" layoutX="120.0" layoutY="10.0" prefHeight="27.0" prefWidth="106.0" promptText="Album" />
+            <TextField fx:id="year" alignment="CENTER" layoutX="230.0" layoutY="10.0" prefHeight="27.0" prefWidth="77.0" promptText="Year" />
+            <Button fx:id="saveEdit" mnemonicParsing="false" prefHeight="25.0" prefWidth="44.0" text="Save" />
+            <!--<Text fx:id="albumDisplay" strokeType="OUTSIDE" strokeWidth="0.0" text="A" textAlignment="CENTER" wrappingWidth="116.65966796875" text="STUFF">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>-->
+            <Button fx:id="cancelOperation" mnemonicParsing="false" prefHeight="8.0" prefWidth="39.0" text="CXL" />
+            <!--  <Button mnemonicParsing="false" text="Delete" />
+            <Button layoutX="350.0" layoutY="10.0" mnemonicParsing="false" text="Edit" />-->
+         </children>
+      </HBox>
+      <ListView fx:id="listView" layoutX="42.0" layoutY="156.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="306.0" prefWidth="263.0" />
+      <Text layoutX="71.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Song" wrappingWidth="50.09521484375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="200.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist" wrappingWidth="50.09521484375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="345.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="107.09521484375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="316.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="318.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="314.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="321.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="44.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Required)" />
+      <Text layoutX="156.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Required)" />
+      <Text fx:id="songNameDisplay" layoutX="415.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text1" />
+      <Text fx:id="artistDisplay" layoutX="415.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text2" />
+      <Text fx:id="albumDisplay" layoutX="415.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text3" />
+      <Text fx:id="yearDisplay" layoutX="415.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text4" />
+   </children>
+</AnchorPane>

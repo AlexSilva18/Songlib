@@ -1,8 +1,22 @@
+/*CS 213 Fall 2018 - Assignment 1, Song Library
+		Student1 Name Alex Silva  netid: ars366
+		Student2 Name: Hongping Lin netid: Lin hl793
+		Grader Name: Govind*/
+
 package songlib.view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.ResourceBundle;
+import java.util.Scanner;
 
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
@@ -17,40 +32,53 @@ import javafx.stage.Stage;
 import songlib.application.Song;
 import songlib.application.SongMethod;
 
-public class songlibController {
-	
-	@FXML private TextField songName;
-	@FXML private TextField artist;
-	@FXML private TextField album;
-	@FXML private TextField year;
+public class songlibController{
 
-	@FXML private Text songNameDisplay;
-	@FXML private Text artistDisplay;
-	@FXML private Text albumDisplay;
-	@FXML private Text yearDisplay;
+	@FXML
+	private TextField songName;
+	@FXML
+	private TextField artist;
+	@FXML
+	private TextField album;
+	@FXML
+	private TextField year;
 
-	@FXML Button addSong;
-	@FXML Button editSong;
-	@FXML Button deleteSong;
-	@FXML Button saveEdit;
-	@FXML Button cancelOperation;
+	@FXML
+	public Text songNameDisplay;
+	@FXML
+	public Text artistDisplay;
+	@FXML
+	public Text albumDisplay;
+	@FXML
+	public Text yearDisplay;
 
-	@FXML ListView<Song> listView;
+	@FXML
+	Button addSong;
+	@FXML
+	Button editSong;
+	@FXML
+	Button deleteSong;
+	@FXML
+	Button saveEdit;
+	@FXML
+	Button cancelOperation;
 
-
-
+	@FXML
+	ListView<Song> listView;
 
 	private ObservableList<Song> obsList = FXCollections.observableArrayList();
-
-
-	ArrayList<Song> songList = new ArrayList<>();
+	public static ArrayList<Song> songList = new ArrayList<>();
 
 	public void start(Stage mainStage) {
-
+		getfromFile();
 		//Song s = new Song("stuff", "1", "2", "3");
 		//obsList.addAll(s);
-		// keep save button deactivated
-		saveEdit.setDisable(true);
+
+		// keep buttons deactivated if list is empty
+		if (obsList.isEmpty())
+			toggleButtons(1, 1);
+		else
+			toggleButtons(0, 1);
 
 		// write data from file to arrayList
 		obsList.addAll(songList);
@@ -63,15 +91,18 @@ public class songlibController {
 		//int selectedIndex = listView.getSelectionModel().getSelectedIndex();
 
 		// gets every mouse selection and display the song details
-		listView.getSelectionModel().selectedItemProperty()
-				.addListener(new ChangeListener<Song>() {
-					@Override
-					public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
-						//System.out.println(oldValue.getSongName());
-						// sets the text displays to the values of the song selected
-						//setDisplay(newValue);
-					}
-				});
+		if (!(listView.getSelectionModel().isEmpty())) {
+			listView.getSelectionModel().selectedItemProperty()
+					.addListener(new ChangeListener<Song>() {
+						@Override
+						public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
+							//System.out.println(newValue.getSongName());
+							// sets the text displays to the values of the song selected
+							setDisplay(newValue);
+						}
+					});
+		}
+
 
 //		listView.getSelectionModel()
 //				.getSelectedItem((song.) -> albumDisplay.setText());
@@ -96,7 +127,6 @@ public class songlibController {
 		addSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-
 				//check if input fields are empty
 				if (!songName.getText().isEmpty() && !artist.getText().isEmpty()) {
 
@@ -107,31 +137,27 @@ public class songlibController {
 					// retrieve sorted index to insert new song, returns -1 if song is duplicate
 					int index = new SongMethod().insertSortedIndex(songList, newSong);
 
-					if (index == -1){
+					if (index == -1) {
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.initOwner(mainStage);  // need to know the parent of screen and pop up on the center to that screen
 						alert.setTitle("Error");
 						alert.setHeaderText("Song is already in the List");
-						String content  = "Song: " + newSong.getSongName() + " " +
+						String content = "Song: " + newSong.getSongName() + " " +
 								"Artist: " + newSong.getArtist();
 
 						alert.setContentText(content);
 						alert.showAndWait();
-					}
-					else{
+					} else {
 						//System.out.println("sorted index is: " + index);
 						songList.add(index, newSong);
 
 						// add songs from ArrayList to ObservableList
-						updateObslList(newSong, obsList);
-
-						// pre-select added song
-						listView.getSelectionModel().select(index);
+						updateObslList(index, newSong, obsList);
 
 						clearTextField();
 					}
 				}
-				saveEdit.setDisable(true);
+				toggleButtons(0, 1);
 			}
 		});
 
@@ -141,7 +167,7 @@ public class songlibController {
 			public final void handle(ActionEvent event) {
 
 				//showItemInputDialog(mainStage);
-				saveEdit.setDisable(false);
+				toggleButtons(0, 0);
 
 				// get mouse selected song and index
 				Song song = listView.getSelectionModel().getSelectedItem();
@@ -183,7 +209,11 @@ public class songlibController {
 				if (!songList.isEmpty()) {
 					listView.getSelectionModel().select(index);
 				}
-				saveEdit.setDisable(true);
+
+				if (obsList.isEmpty())
+					toggleButtons(1, 1);
+				else
+					toggleButtons(0, 1);
 			}
 		});
 
@@ -196,79 +226,168 @@ public class songlibController {
 						showItemInputDialog(mainStage));*/
 	}
 
+	private void toggleButtons(int flag, int saveFlag) {
+
+		if (flag == 1) {
+			editSong.setDisable(true);
+			deleteSong.setDisable(true);
+			cancelOperation.setDisable(true);
+
+		} else if (flag == 0) {
+			editSong.setDisable(false);
+			deleteSong.setDisable(false);
+			cancelOperation.setDisable(false);
+		}
+		if (saveFlag == 1) {
+			saveEdit.setDisable(true);
+		} else if (saveFlag == 0) {
+			saveEdit.setDisable(false);
+
+		}
+	}
+
+	private void displaySelection(Song song) {
+		songNameDisplay.setText(song.getSongName());
+		//setDisplay(song);
+	}
+
 	// Populate observableList with new Song
-	private void updateObslList(Song newSong, ObservableList<Song> obsList){
+	private void updateObslList(int index, Song newSong, ObservableList<Song> obsList) {
 		obsList.clear();
 //		obsList.removeAll(songList);
 		obsList.addAll(songList);
 		//listView.getItems().removeAll(obsList);
 		//listView.getItems().addAll(obsList);
 		listView.getItems().setAll(obsList);
+
+		// pre-select added song
+		listView.getSelectionModel().select(index);
 	}
 
-	private void saveAction(int index, int songListIndex, Song song){
+	private void saveAction(int index, int songListIndex, Song song) {
 
 		// update song fields
 		song.setSongFields(songName.getText(), artist.getText(), album.getText(), year.getText());
 
 		// update songList with the edited song fields
-		songList.set(songListIndex, song);
-		obsList.clear();
-		obsList.setAll(songList);
+		//songList.set(songListIndex, song);
+		songList.remove(songListIndex);
+		int newIndex = new SongMethod().insertSortedIndex(songList, song);
+		songList.add(newIndex, song);
+		//System.out.println(newIndex);
+		updateObslList(newIndex, song, obsList);
+		//obsList.clear();
+		//obsList.addAll(songList);
 
 		clearTextField();
-		saveEdit.setDisable(true);
-		listView.getItems().setAll(obsList);
+		toggleButtons(0, 1);
+		//listView.getItems().setAll(obsList);
 	}
 
 	// clear all TextFields
-	private void clearTextField(){
+	private void clearTextField() {
 		songName.clear();
 		artist.clear();
 		album.clear();
 		year.clear();
 	}
 
-	private void setDisplay(Song song){
-		System.out.println(song.getSongName());
+	private void setDisplay(Song song) {
 		// set display fields to mouse selected Song
-		/*songNameDisplay.setText(song.getSongName());
+		songNameDisplay.setText(song.getSongName());
 		artistDisplay.setText(song.getArtist());
 		albumDisplay.setText(song.getAlbum());
-		yearDisplay.setText(song.getYear());*/
+		yearDisplay.setText(song.getYear());
 
+		if (obsList.isEmpty()) {
+			songNameDisplay.setText(null);
+			artistDisplay.setText(null);
+			albumDisplay.setText(null);
+			yearDisplay.setText(null);
+		}
 	}
 
-	/*private void showSongList(Stage mainStage) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-	      alert.initOwner(mainStage);  // need to know the parent of screen and pop up on the center to that screen
-	      alert.setTitle("List Item");
-	      alert.setHeaderText("Selected list item properties");
-	      String content  = "Index: " +
-	    		  listView.getSelectionModel().getSelectedIndex() +
-	    		  "\nValue: " +
-	    		  listView.getSelectionModel().getSelectedItem();
-	      
-	      alert.setContentText(content);
-	      alert.showAndWait();
-	}*/
-	
-	/*private void showItemInputDialog(Stage mainStage) {
-		Song item = listView.getSelectionModel().getSelectedItem();
-		int index = listView.getSelectionModel().getSelectedIndex();
-		
-		TextInputDialog dialog = new TextInputDialog(item.getSongName());
-		dialog.initOwner(mainStage); dialog.setTitle("Add Song");
-		dialog.setHeaderText("Selected Item (Index: " + index + ")");
-		dialog.setContentText("Enter Song name: ");		    
-	    
-		Optional<String> result = dialog.showAndWait();
-	    //Optional<Pair<String, String>> result = dialog.showAndWait();
-		//if (result.isPresent()) { obsList.set(index, result.get());}
-		
-		
-	}*/
+	public void getfromFile() {
+		//System.out.println("does file exist?");
+		File file = new File("SongLibrary.txt");
+
+		if(file.exists() && file.isFile())
+		{
+			//System.out.println("file exists");
+			try {
+				Scanner sc = new Scanner(file);
+				int line =0;
+				while(sc.hasNextLine())
+				{
+					line++;
+					sc.nextLine();
+				}
+				sc.close();
+//
+//					sc = new Scanner(file);
+//					line -= 2;
+//					sc.nextLine();
+//					sc.nextLine();
+
+				if(line % 4 == 0)
+				{
+					for(int input=0; input<line; input+=4)
+					{
+						songList.add(new Song(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine()));
+					}
+				}
+			}catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			}
+
+			listView.setItems(obsList);
+			if(!songList.isEmpty())
+			{
+				listView.getSelectionModel().select(0);
+			}
+
+			showSongDestribtion();
+
+			listView.getSelectionModel().selectedItemProperty().addListener(
+					(obs, oldValue, newValue) -> showSongDestribtion());
 
 
-	
+
+		}else {
+			System.out.println("file does not exist");
+			try {
+				//File file = new File("SongLibrary.txt");
+				PrintWriter write = new PrintWriter(file);
+				file.createNewFile();
+				for(int i =0; i<songList.size(); i++) {
+					write.println(songList.get(i).getSongName());
+					write.println(songList.get(i).getArtist());
+					write.println(songList.get(i).getAlbum());
+					write.print(songList.get(i).getYear());
+					if(i !=songList.size()-1) {
+						write.println("");
+					}write.close();
+
+				}
+
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+	private void showSongDestribtion()
+	{
+		if(listView.getSelectionModel().getSelectedIndex() < 0)
+		{
+			return;
+		}
+
+		Song song = listView.getSelectionModel().getSelectedItem();
+		songName.setText(song.getSongName());
+		artist.setText(song.getArtist());
+		album.setText(song.getAlbum());
+		year.setText(song.getYear());
+	}
 }
