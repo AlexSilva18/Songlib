@@ -93,6 +93,7 @@ public class songlibController{
 
 		//int selectedIndex = listView.getSelectionModel().getSelectedIndex();
 
+		System.out.println(listView.getSelectionModel().isEmpty());
 		// gets every mouse selection and display the song details
 		if (!(listView.getSelectionModel().isEmpty())) {
 			listView.getSelectionModel().selectedItemProperty()
@@ -152,9 +153,9 @@ public class songlibController{
 						// wipe input fields
 						clearTextField();
 					}
+					// Keep all buttons active except save button
+					toggleButtons(0, 1);
 				}
-				// Keep all buttons active except save button
-				toggleButtons(0, 1);
 			}
 		});
 
@@ -225,20 +226,20 @@ public class songlibController{
 		if (flag == 1) {
 			editSong.setDisable(true);
 			deleteSong.setDisable(true);
-			cancelOperation.setDisable(true);
 
 			// Enable all buttons
 		} else if (flag == 0) {
 			editSong.setDisable(false);
 			deleteSong.setDisable(false);
-			cancelOperation.setDisable(false);
+
 		}
 		// disable/enable save button
 		if (saveFlag == 1) {
 			saveEdit.setDisable(true);
+			cancelOperation.setDisable(true);
 		} else if (saveFlag == 0) {
 			saveEdit.setDisable(false);
-
+			cancelOperation.setDisable(false);
 		}
 	}
 
