@@ -107,7 +107,10 @@ public class songlibController{
 				clearTextField();
 
 				// enable all buttons except save button
-				toggleButtons(0, 1);
+				if (obsList.isEmpty())
+					toggleButtons(1, 1);
+				else
+					toggleButtons(0, 1);
 			}
 		});
 
@@ -116,6 +119,7 @@ public class songlibController{
 		addSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+
 				//check if input fields are empty
 				if (!songName.getText().isEmpty() && !artist.getText().isEmpty()) {
 
@@ -211,13 +215,6 @@ public class songlibController{
 
 				// wipe input fields
 				clearTextField();
-
-				// Keep all buttons active except save button. If list is empty only enable Add Button
-				if (obsList.isEmpty()) {
-					toggleButtons(1, 1);
-				}
-				else
-					toggleButtons(0, 1);
 			}
 		});
 	}
@@ -242,10 +239,10 @@ public class songlibController{
 		// disable/enable save button
 		if (saveFlag == 1) {
 			saveEdit.setDisable(true);
-			cancelOperation.setDisable(true);
+			//cancelOperation.setDisable(true);
 		} else if (saveFlag == 0) {
 			saveEdit.setDisable(false);
-			cancelOperation.setDisable(false);
+			//cancelOperation.setDisable(false);
 		}
 	}
 
@@ -289,19 +286,23 @@ public class songlibController{
 	}
 
 	private void setDisplay(Song song) {
-		// set display fields to mouse selected Song
-		songNameDisplay.setText(song.getSongName());
-		artistDisplay.setText(song.getArtist());
-		albumDisplay.setText(song.getAlbum());
-		yearDisplay.setText(song.getYear());
-
+		
 		// empty fields if observable list is empty
 		if (obsList.isEmpty()) {
 			songNameDisplay.setText(null);
 			artistDisplay.setText(null);
 			albumDisplay.setText(null);
 			yearDisplay.setText(null);
+			// Keep all buttons active except save button. If list is empty only enable Add Button
+			toggleButtons(1,1);
 		}
+		
+		// set display fields to mouse selected Song
+		songNameDisplay.setText(song.getSongName());
+		artistDisplay.setText(song.getArtist());
+		albumDisplay.setText(song.getAlbum());
+		yearDisplay.setText(song.getYear());
+
 	}
 
 	// Read songs from file and input them into the ArrayList

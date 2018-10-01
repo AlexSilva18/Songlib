@@ -132,7 +132,7 @@
                         </Text>
                         <Text fx:id="songNameDisplay" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="98.99999760091305" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="60.0" />
                         <Text fx:id="artistDisplay" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="98.99999760091305" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="110.0" />
-                        <Text fx:id="albumDisplay" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="109.00000482797623" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="160.0" />
+                        <Text fx:id="albumDisplay" layoutX="59.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="99.99999403953552" AnchorPane.leftAnchor="59.0" AnchorPane.topAnchor="160.0" />
                         <Text fx:id="yearDisplay" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="99.99999403953552" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="210.0" />
                      </children>
                   </AnchorPane>
