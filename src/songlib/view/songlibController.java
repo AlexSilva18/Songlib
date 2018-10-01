@@ -94,6 +94,9 @@ public class songlibController{
 				.addListener(new ChangeListener<Song>() {
 					@Override
 					public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
+						//Song song = listView.getSelectionModel().getSelectedItem();
+						//int index = listView.getSelectionModel().getSelectedIndex();
+						//System.out.println(obsList.get(index).getSongName() + " > " + index);
 						// sets the text displays to the values of the song selected
 						setDisplay(newValue);
 					}
@@ -146,7 +149,7 @@ public class songlibController{
 						// add songs to ArrayList and then to ObservableList
 						songList.add(index, newSong);
 						updateObslList(index, obsList);
-
+						setDisplay(newSong);
 						// wipe input fields
 						clearTextField();
 					}
@@ -208,8 +211,16 @@ public class songlibController{
 						songList.remove(songListIndex);
 						obsList.remove(song);
 						listView.getItems().remove(index);
-						listView.getSelectionModel().select(index);
-						setDisplay(songList.get(index));
+
+						// get arrayList index when not empty
+						int lastItem = songList.size() - 1;
+
+						if (lastItem >=	 0 ){
+							listView.getSelectionModel().select(lastItem);
+							setDisplay(songList.get(lastItem));
+						}
+						else
+							setDisplay(null);
 					}
 				}
 
@@ -288,7 +299,7 @@ public class songlibController{
 	private void setDisplay(Song song) {
 		
 		// empty fields if observable list is empty
-		if (obsList.isEmpty()) {
+		if (song == null) {
 			songNameDisplay.setText(null);
 			artistDisplay.setText(null);
 			albumDisplay.setText(null);
@@ -296,13 +307,13 @@ public class songlibController{
 			// Keep all buttons active except save button. If list is empty only enable Add Button
 			toggleButtons(1,1);
 		}
-		
-		// set display fields to mouse selected Song
-		songNameDisplay.setText(song.getSongName());
-		artistDisplay.setText(song.getArtist());
-		albumDisplay.setText(song.getAlbum());
-		yearDisplay.setText(song.getYear());
-
+		else {
+			// set display fields to mouse selected Song
+			songNameDisplay.setText(song.getSongName());
+			artistDisplay.setText(song.getArtist());
+			albumDisplay.setText(song.getAlbum());
+			yearDisplay.setText(song.getYear());
+		}
 	}
 
 	// Read songs from file and input them into the ArrayList
