@@ -10,10 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 
 import javafx.beans.binding.Bindings;
@@ -74,9 +71,6 @@ public class songlibController{
 		// get data from SongLibrary.txt
 		readfromFIle();
 
-		//Song s = new Song("stuff", "1", "2", "3");
-		//obsList.addAll(s);
-
 		// keep buttons deactivated if list is empty
 		if (songList.isEmpty())
 			toggleButtons(1, 1);
@@ -91,20 +85,19 @@ public class songlibController{
 		if (!obsList.isEmpty())
 			listView.getSelectionModel().select(0);
 
-		//int selectedIndex = listView.getSelectionModel().getSelectedIndex();
+		// display first song details
+		if (!songList.isEmpty())
+			setDisplay(songList.get(0));
 
-		System.out.println(listView.getSelectionModel().isEmpty());
 		// gets every mouse selection and display the song details
-		if (!(listView.getSelectionModel().isEmpty())) {
-			listView.getSelectionModel().selectedItemProperty()
-					.addListener(new ChangeListener<Song>() {
-						@Override
-						public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
-							// sets the text displays to the values of the song selected
-							setDisplay(newValue);
-						}
-					});
-		}
+		listView.getSelectionModel().selectedItemProperty()
+				.addListener(new ChangeListener<Song>() {
+					@Override
+					public void changed(ObservableValue<? extends Song> observable, Song oldValue, Song newValue) {
+						// sets the text displays to the values of the song selected
+						setDisplay(newValue);
+					}
+				});
 
 		// CXL button to clear all input fields
 		cancelOperation.setOnAction(new EventHandler<ActionEvent>() {
@@ -165,7 +158,7 @@ public class songlibController{
 			public final void handle(ActionEvent event) {
 
 				//showItemInputDialog(mainStage);
-				toggleButtons(0, 0);
+				toggleButtons(2, 0);
 
 				// get mouse selected song and index
 				Song song = listView.getSelectionModel().getSelectedItem();
@@ -191,29 +184,38 @@ public class songlibController{
 		deleteSong.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// get mouse selected song and index
-				Song song = listView.getSelectionModel().getSelectedItem();
-				int index = listView.getSelectionModel().getSelectedIndex();
 
-				// get index of the song in the ArrayList
-				int songListIndex = songList.indexOf(song);
-
-				// update ArrayList, observableList and ListView
-				songList.remove(songListIndex);
-				obsList.remove(song);
-				listView.getItems().remove(index);
-
-				// pre-select next/previous song when deleted
 				if (!songList.isEmpty()) {
-					listView.getSelectionModel().select(index);
+
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("WARNING");
+					alert.setHeaderText("You are about to delete the selected song");
+					alert.setContentText("Are you sure?");
+
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.get() == ButtonType.OK) {
+						Song song = listView.getSelectionModel().getSelectedItem();
+						int index = listView.getSelectionModel().getSelectedIndex();
+
+						// get index of the song in the ArrayList
+						int songListIndex = songList.indexOf(song);
+
+						// update ArrayList, observableList and ListView
+						songList.remove(songListIndex);
+						obsList.remove(song);
+						listView.getItems().remove(index);
+						listView.getSelectionModel().select(index);
+						setDisplay(songList.get(index));
+					}
 				}
 
 				// wipe input fields
 				clearTextField();
 
 				// Keep all buttons active except save button. If list is empty only enable Add Button
-				if (obsList.isEmpty())
+				if (obsList.isEmpty()) {
 					toggleButtons(1, 1);
+				}
 				else
 					toggleButtons(0, 1);
 			}
@@ -229,9 +231,13 @@ public class songlibController{
 
 			// Enable all buttons
 		} else if (flag == 0) {
+			addSong.setDisable(false);
 			editSong.setDisable(false);
 			deleteSong.setDisable(false);
 
+		} else if (flag == 2) {
+			addSong.setDisable(true);
+			deleteSong.setDisable(true);
 		}
 		// disable/enable save button
 		if (saveFlag == 1) {
@@ -320,6 +326,9 @@ public class songlibController{
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("WARNING");
+				alert.setContentText("File does not exist");
 			}
 		}
 	}

@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class SongLib extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception{
+
 		// Loads an object hierarchy from XML document
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(

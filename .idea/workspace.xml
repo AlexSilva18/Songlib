@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a50c038d-13c1-4c06-8ada-0760fde2b5bc" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SongLibrary.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SongLibrary.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Songlib/songlib/application/Song.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Songlib/songlib/application/Song.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Songlib/songlib/application/SongLib.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Songlib/songlib/application/SongLib.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlib.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlib.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController$2.class" afterDir="false" />
@@ -11,6 +14,8 @@
       <change beforePath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Songlib/songlib/view/songlibController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/songlib/application/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/songlib/application/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/songlib/application/SongLib.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/songlib/application/SongLib.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/songlib/view/songlib.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/songlib/view/songlib.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/songlib/view/songlibController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/songlib/view/songlibController.java" afterDir="false" />
     </list>
@@ -27,9 +32,10 @@
       <file leaf-file-name="Song.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/songlib/application/Song.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="44" column="69" selection-start-line="44" selection-start-column="69" selection-end-line="44" selection-end-column="69" />
+            <state relative-caret-position="-247">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
               <folding>
+                <element signature="e#0#1976#0" expanded="true" />
                 <element signature="e#917#918#0" expanded="true" />
                 <element signature="e#995#996#0" expanded="true" />
               </folding>
@@ -40,8 +46,11 @@
       <file leaf-file-name="SongMethod.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/songlib/application/SongMethod.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            <state relative-caret-position="593">
+              <caret line="37" column="13" lean-forward="true" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#1536#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,8 +58,8 @@
       <file leaf-file-name="songlibController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/songlib/view/songlibController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="95" column="65" selection-start-line="95" selection-start-column="65" selection-end-line="95" selection-end-column="65" />
+            <state relative-caret-position="508">
+              <caret line="207" column="53" selection-start-line="207" selection-start-column="53" selection-end-line="207" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -58,8 +67,8 @@
       <file leaf-file-name="SongLib.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/songlib/application/SongLib.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="55" column="33" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+            <state relative-caret-position="253">
+              <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
               <folding>
                 <element signature="e#0#1766#0" expanded="true" />
               </folding>
@@ -70,8 +79,8 @@
       <file leaf-file-name="songlib.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/songlib/view/songlib.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2400">
-              <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
+            <state>
+              <caret column="10" selection-start-column="10" selection-end-column="10" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -87,11 +96,14 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>Label1</find>
-      <find>songNameDisplay</find>
       <find>System.</find>
       <find>update</find>
       <find>displaySelection</find>
       <find>clearButton</find>
+      <find>setDisplay</find>
+      <find>songNameDisplay</find>
+      <find>Test1</find>
+      <find>cancel</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -110,9 +122,9 @@
       <list>
         <option value="$PROJECT_DIR$/src/songlib/application/Main.java" />
         <option value="$PROJECT_DIR$/src/songlib/application/SongMethod.java" />
-        <option value="$PROJECT_DIR$/src/songlib/application/SongLib.java" />
         <option value="$PROJECT_DIR$/SongLibrary.txt" />
         <option value="$PROJECT_DIR$/src/songlib/application/Song.java" />
+        <option value="$PROJECT_DIR$/src/songlib/application/SongLib.java" />
         <option value="$PROJECT_DIR$/src/songlib/view/songlib.fxml" />
         <option value="$PROJECT_DIR$/src/songlib/view/songlibController.java" />
       </list>
@@ -128,8 +140,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="343" />
-    <option name="y" value="-8" />
+    <option name="x" value="257" />
+    <option name="y" value="-18" />
     <option name="width" value="960" />
     <option name="height" value="1053" />
   </component>
@@ -138,8 +150,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -147,11 +158,37 @@
               <item name="Songlib" type="b2602c69:ProjectViewProjectNode" />
               <item name="Songlib" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Songlib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Songlib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Songlib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Songlib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="songlib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Songlib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Songlib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="songlib" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Songlib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Songlib" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="songlib" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -160,7 +197,7 @@
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/asst1" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -234,12 +271,13 @@
       <updated>1538199044694</updated>
       <workItem from="1538199045969" duration="2260000" />
       <workItem from="1538208151172" duration="23436000" />
-      <workItem from="1538292511944" duration="507000" />
+      <workItem from="1538292511944" duration="2529000" />
+      <workItem from="1538372168531" duration="2064000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26233000" />
+    <option name="totallyTimeSpent" value="30289000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -255,8 +293,8 @@
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="TODO" order="5" weight="0.32943678" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.32942432" />
+      <window_info anchor="bottom" id="TODO" order="5" weight="0.22529224" />
+      <window_info anchor="right" id="Messages" order="11" type="SLIDING" weight="0.22954305" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -264,12 +302,13 @@
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32943678" />
-      <window_info active="true" anchor="right" id="Run" order="10" visible="true" weight="0.39635417" />
+      <window_info active="true" anchor="right" id="Run" order="10" visible="true" weight="0.31822917" />
       <window_info anchor="right" id="Terminal" order="9" weight="0.36197916" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.12708333" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12708333" />
       <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32942432" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -281,7 +320,6 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32942432" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,6 +334,57 @@
         <state relative-caret-position="680">
           <caret line="44" column="69" selection-start-line="44" selection-start-column="69" selection-end-line="44" selection-end-column="69" />
           <folding>
+            <element signature="e#0#1976#0" expanded="true" />
+            <element signature="e#917#918#0" expanded="true" />
+            <element signature="e#995#996#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/songlib/application/SongMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1536#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/songlib/application/SongLib.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="55" column="33" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#1766#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/songlib/view/songlib.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2500">
+          <caret line="125" column="32" lean-forward="true" selection-start-line="125" selection-start-column="32" selection-end-line="125" selection-end-column="32" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/songlib/view/style.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/songlib/view/songlibController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5480">
+          <caret line="302" column="48" lean-forward="true" selection-start-line="302" selection-start-column="48" selection-end-line="302" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/songlib/application/Song.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="44" column="69" selection-start-line="44" selection-start-column="69" selection-end-line="44" selection-end-column="69" />
+          <folding>
+            <element signature="e#0#1976#0" expanded="true" />
             <element signature="e#917#918#0" expanded="true" />
             <element signature="e#995#996#0" expanded="true" />
           </folding>
@@ -342,6 +431,7 @@
         <state relative-caret-position="80">
           <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding>
+            <element signature="e#0#1976#0" expanded="true" />
             <element signature="e#917#918#0" expanded="true" />
             <element signature="e#995#996#0" expanded="true" />
           </folding>
@@ -366,14 +456,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SongLibrary.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/songlib/application/SongLib.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#1766#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/songlib/view/style.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/songlib/view/songlib.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" selection-start-column="10" selection-end-column="10" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/songlib/application/Song.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="44" column="69" selection-start-line="44" selection-start-column="69" selection-end-line="44" selection-end-column="69" />
+        <state relative-caret-position="-247">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding>
+            <element signature="e#0#1976#0" expanded="true" />
             <element signature="e#917#918#0" expanded="true" />
             <element signature="e#995#996#0" expanded="true" />
           </folding>
@@ -382,36 +494,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/songlib/application/SongMethod.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/songlib/view/songlib.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2400">
-          <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/songlib/application/SongLib.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="55" column="33" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="33" />
+        <state relative-caret-position="593">
+          <caret line="37" column="13" lean-forward="true" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
           <folding>
-            <element signature="e#0#1766#0" expanded="true" />
+            <element signature="e#0#1536#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SongLibrary.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/songlib/view/songlibController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="95" column="65" selection-start-line="95" selection-start-column="65" selection-end-line="95" selection-end-column="65" />
+        <state relative-caret-position="508">
+          <caret line="207" column="53" selection-start-line="207" selection-start-column="53" selection-end-line="207" selection-end-column="53" />
         </state>
       </provider>
     </entry>

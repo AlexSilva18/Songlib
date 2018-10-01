@@ -41,20 +41,12 @@ public class Song {
         return year;
     }
 
+    // writes song to file with this format
     public String songtoWrite() {
         return (songName + "\t" + artist + "\t" + album + "\t" + year);
     }
 
-    /*public int fetchSong(ArrayList<Song> songList, Song song){
-        for (Song s : songList){
-            if (s.getSongName() != null &&  s.getSongName().equals(song.getSongName()) &&
-                    s.getArtist().equals(song.getArtist())){
-               return songList.indexOf(s);
-            }
-        }
-        return -1;
-    }*/
-
+    // update song fields when song is edited
     public void setSongFields(String songName, String artist, String album, String year) {
         this.songName = songName;
         this.artist = artist;
