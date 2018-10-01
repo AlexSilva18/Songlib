@@ -332,7 +332,14 @@ public class songlibController{
 				while (sc.hasNextLine()) {
 					items = sc.nextLine();
 					songItems = items.split("\t");
-					songList.add(new Song(songItems[0],songItems[1], songItems[2],songItems[3]));
+					
+					// check if any fields of the List are empty (no album or field were provided)
+					if (songItems.length == 4)
+						songList.add(new Song (songItems[0], songItems[1], songItems[2], songItems[3]));
+					else if (songItems.length == 3)
+						songList.add(new Song (songItems[0], songItems[1], songItems[2], null));
+					else if (songItems.length == 2)
+						songList.add(new Song (songItems[0], songItems[1], null, null));
 				}
 				sc.close();
 
