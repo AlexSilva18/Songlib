@@ -127,8 +127,8 @@ public class songlibController{
 				if (!songName.getText().isEmpty() && !artist.getText().isEmpty()) {
 
 					// Create new song instance to add to ArrayList
-					Song newSong = new Song(songName.getText().toLowerCase(), artist.getText().toLowerCase(),
-							album.getText().toLowerCase(), year.getText().toLowerCase());
+					Song newSong = new Song(songName.getText(), artist.getText(),
+							album.getText(), year.getText());
 
 					// retrieve sorted index to insert new song, returns -1 if song is duplicate
 					int index = new SongMethod().insertSortedIndex(songList, newSong);
@@ -270,8 +270,7 @@ public class songlibController{
 	private void saveAction(int index, int songListIndex, Song song, Stage mainStage) {
 
 		// update song fields
-		song.setSongFields(songName.getText().toLowerCase(), artist.getText().toLowerCase(),
-				album.getText().toLowerCase(), year.getText().toLowerCase());
+		song.setSongFields(songName.getText(), artist.getText(), album.getText(), year.getText());
 
 		songList.remove(songListIndex);
 
