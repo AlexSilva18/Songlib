@@ -17,17 +17,17 @@ public class SongMethod extends Song{
         for (Song s : songList){
             ++i;
             // check if song comes after the next Song alphabetically, if so go to the next item
-            if (song.getSongName().compareTo(s.getSongName()) > 0)
+            if (song.getSongName().trim().toUpperCase().compareTo(s.getSongName().trim().toUpperCase()) > 0) {
                 continue;
-
+            }
             // check if song is already in the list, if so check Artists
-            else if (s.compareTo(song) == 0){
+            else if (s.getSongName().trim().toUpperCase().compareTo(song.getSongName().trim().toUpperCase()) == 0){
 
                 for (Song a : songList){
-                    if (song.getArtist().compareTo(a.getArtist()) > 0)
+                    if (song.getArtist().trim().toUpperCase().compareTo(a.getArtist().trim().toUpperCase()) > 0)
                         continue;
 
-                    else if (song.getArtist().compareTo(a.getArtist()) < 0)
+                    else if (song.getArtist().trim().toUpperCase().compareTo(a.getArtist().trim().toUpperCase()) < 0)
                         return songList.indexOf(a);
 
                     else{

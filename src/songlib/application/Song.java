@@ -7,7 +7,9 @@ package songlib.application;
 
 import java.util.ArrayList;
 
-public class Song {
+//import model.Song;
+
+public class Song implements Comparable<Song>{
     String songName;
     String artist;
     String album;
@@ -55,8 +57,9 @@ public class Song {
     }
 
     // allows comparison between two songs with compareTo
+    @Override
     public int compareTo(Song song){
-        return this.getSongName().compareTo(song.getSongName());
+        return this.getSongName().toUpperCase().compareTo(song.getSongName().toUpperCase());
     }
 
     // to store data in a file

@@ -136,7 +136,7 @@ public class songlibController{
 					// Pop Up error message for duplicate song
 					if (index == -1) {
 						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.initOwner(mainStage);  // need to know the parent of screen and pop up on the center to that screen
+						alert.initOwner(mainStage);  
 						alert.setTitle("Error");
 						alert.setHeaderText("Song is already in the List");
 						String content = "Song: " + newSong.getSongName() + " " +
@@ -172,16 +172,16 @@ public class songlibController{
 				int index = listView.getSelectionModel().getSelectedIndex();
 
 				// Fill textFields with item selected to edit
-				songName.setText(song.getSongName().toLowerCase());
-				artist.setText(song.getArtist().toLowerCase());
-				album.setText(song.getAlbum().toLowerCase());
-				year.setText(song.getYear().toLowerCase());
+				songName.setText(song.getSongName());
+				artist.setText(song.getArtist());
+				album.setText(song.getAlbum());
+				year.setText(song.getYear());
 
 				// fetch songList for the index holding the selected song
 				int songListIndex = songList.indexOf(song);
 
 				// saves edited song to the songList and updates the observableList
-				saveEdit.setOnAction(e -> saveAction(index, songListIndex, song));
+				saveEdit.setOnAction(e -> saveAction(index, songListIndex, song, mainStage));
 
 			}
 		});
@@ -267,25 +267,41 @@ public class songlibController{
 		listView.getSelectionModel().select(index);
 	}
 
-	private void saveAction(int index, int songListIndex, Song song) {
+	private void saveAction(int index, int songListIndex, Song song, Stage mainStage) {
 
 		// update song fields
-		song.setSongFields(songName.getText(), artist.getText(), album.getText(), year.getText());
+		song.setSongFields(songName.getText().toLowerCase(), artist.getText().toLowerCase(),
+				album.getText().toLowerCase(), year.getText().toLowerCase());
 
 		songList.remove(songListIndex);
 
 		// fetch sorted index to insert song in the ArrayList
 		int newIndex = new SongMethod().insertSortedIndex(songList, song);
 
-		// update ArrayList, observableList and Listview
-		songList.add(newIndex, song);
-		updateObslList(newIndex, obsList);
+		// Pop Up error message for duplicate song
+		if (newIndex == -1) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.initOwner(mainStage);
+			alert.setTitle("Error");
+			alert.setHeaderText("Song is already in the List");
+			String content = "Song: " + song.getSongName() + " " +
+					"Artist: " + song.getArtist();
 
-		// Clear all input fields
-		clearTextField();
+			alert.setContentText(content);
+			alert.showAndWait();
 
-		// Enable all buttons except save button
-		toggleButtons(0, 1);
+		} else {
+
+			// update ArrayList, observableList and Listview
+			songList.add(newIndex, song);
+			updateObslList(newIndex, obsList);
+
+			// Clear all input fields
+			clearTextField();
+
+			// Enable all buttons except save button
+			toggleButtons(0, 1);
+		}
 	}
 
 	// clear all TextFields
@@ -336,6 +352,7 @@ public class songlibController{
 					// check if any fields of the List are empty (no album or field were provided)
 					if (songItems.length == 4)
 						songList.add(new Song (songItems[0], songItems[1], songItems[2], songItems[3]));
+					
 					else if (songItems.length == 3)
 						songList.add(new Song (songItems[0], songItems[1], songItems[2], null));
 					else if (songItems.length == 2)
