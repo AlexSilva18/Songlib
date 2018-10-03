@@ -59,7 +59,29 @@ public class Song implements Comparable<Song>{
     // allows comparison between two songs with compareTo
     @Override
     public int compareTo(Song song){
-        return this.getSongName().toUpperCase().compareTo(song.getSongName().toUpperCase());
+       // return this.getSongName().toUpperCase().compareTo(song.getSongName().toUpperCase());
+    	if(this.songName.trim().toUpperCase().compareTo(song.getSongName().trim().toUpperCase()) == 0){
+    		
+			if(this.artist.trim().toUpperCase().compareTo(song.getArtist().trim().toUpperCase()) == 0)
+			{
+				return 0; //found match
+			}
+			else if(this.artist.trim().toUpperCase().compareTo(song.getArtist().trim().toUpperCase()) > 0){
+				return 1;
+			}
+			else{
+				return -1;
+				}
+		}
+		
+		
+		else if(this.songName.trim().toUpperCase().compareTo(song.getSongName().trim().toUpperCase()) > 0){
+			return 1;
+		}
+		else{
+			return -1;
+		}
+	
     }
 
     // to store data in a file

@@ -1,6 +1,7 @@
 /*CS 213 Fall 2018 - Assignment 1, Song Library
 		Student1 Name Alex Silva  netid: ars366
 		Student2 Name: Hongping Lin netid: hl793
+		Team#45
 		Grader Name: Govind*/
 
 package songlib.view;
@@ -9,11 +10,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
 import java.util.*;
 
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,7 +20,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
@@ -179,7 +177,7 @@ public class songlibController{
 
 				// fetch songList for the index holding the selected song
 				int songListIndex = songList.indexOf(song);
-
+		
 				// saves edited song to the songList and updates the observableList
 				saveEdit.setOnAction(e -> saveAction(index, songListIndex, song, mainStage));
 
@@ -270,7 +268,8 @@ public class songlibController{
 	private void saveAction(int index, int songListIndex, Song song, Stage mainStage) {
 
 		// update song fields
-		song.setSongFields(songName.getText(), artist.getText(), album.getText(), year.getText());
+		song.setSongFields(songName.getText(), artist.getText(),
+				album.getText(), year.getText());
 
 		songList.remove(songListIndex);
 
